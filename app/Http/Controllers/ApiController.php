@@ -35,46 +35,17 @@ class ApiController extends Controller
         }
     }
 
-    public function getItemsBrands()
+    public function getItemsCategories()
     {
         try {
-            return Cache::remember('brands', now()->addMinutes(10), function () {
-                $response = Http::get("{$this->apiBaseUrl}/brands");
+            return Cache::remember('categories', now()->addMinutes(10), function () {
+                $response = Http::get("{$this->apiBaseUrl}/categories");
 
                 if ($response->successful()) {
                     return $response->json();
                 }
 
-                return ['error' => 'Failed to fetch brands', 'details' => $response->body()];
-            });
-        } catch (\Exception $e) {
-            Log::error('API Request Failed: ' . $e->getMessage());
-            return response()->json(['error' => 'Service unavailable'], 503);
-        }
-    }
-
-    public function getProductsByBrand($brand)
-    {
-        try {
-            if (!$brand) {
-                return response()->json(['error' => 'Brand parameter is required'], 400);
-            }
-
-            return Cache::remember("products_by_brand_{$brand}", now()->addMinutes(10), function () use ($brand) {
-                $response = Http::get("{$this->apiBaseUrl}/products");
-
-                if ($response->successful()) {
-                    $products = collect($response->json());
-
-                    // Filter produk berdasarkan brand menggunakan Collection
-                    $filteredProducts = $products->filter(function ($product) use ($brand) {
-                        return isset($product['brand_name']) && strtolower($product['brand_name']) === strtolower($brand);
-                    })->values();
-
-                    return $filteredProducts;
-                }
-
-                return ['error' => 'Failed to fetch products', 'details' => $response->body()];
+                return ['error' => 'Failed to fetch data', 'details' => $response->body()];
             });
         } catch (\Exception $e) {
             Log::error('API Request Failed: ' . $e->getMessage());

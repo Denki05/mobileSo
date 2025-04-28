@@ -21,7 +21,7 @@
                     <tr>
                         <td class="px-6 py-4 whitespace-nowrap">{{ $product['code'] ?? '-' }} - {{ $product['name'] ?? '-' }}</td>
                         <td class="px-6 py-4 whitespace-nowrap">{{ $product['brand_name'] }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">{{ $product['category_id'] ?? '-' }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">{{ $product['category_name'] ?? '-' }}</td> <!-- Menampilkan nama kategori -->
                         <td class="px-6 py-4 whitespace-nowrap">
                             @if ($product['status'] == 1)
                                 <span class="text-green-500 font-semibold">Active</span>
