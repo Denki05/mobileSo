@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ApiController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect()->guest(route('login'));
 });
+
+// GET API
+Route::get('/product', [ApiController::class, 'getItemsProducts'])->name('product');
+Route::get('/brands', [ApiController::class, 'getItemsBrands'])->name('brands');
+
+// Route for fetching products based on brand ID (for dependent dropdown)
+Route::get('/product/brand/{brand}', [ApiController::class, 'getProductsByBrand']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

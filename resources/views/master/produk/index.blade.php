@@ -14,22 +14,23 @@
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Brand</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Category</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Status</th>
-                        <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Action</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 text-sm">
-                    {{-- Contoh data dummy --}}
+                    @foreach ($products as $product)
                     <tr>
-                        <td class="px-6 py-4 whitespace-nowrap">10042/P - Moonlight</td>
-                        <td class="px-6 py-4 whitespace-nowrap">GCF</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Lifestyle</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Active</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-center">
-                            <a href="#" class="text-blue-500 hover:underline mr-2">Edit</a>
-                            <a href="#" class="text-red-500 hover:underline">Hapus</a>
+                        <td class="px-6 py-4 whitespace-nowrap">{{ $product['code'] ?? '-' }} - {{ $product['name'] ?? '-' }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">{{ $product['brand_name'] }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">{{ $product['category_id'] ?? '-' }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            @if ($product['status'] == 1)
+                                <span class="text-green-500 font-semibold">Active</span>
+                            @elseif ($product['status'] == 2)
+                                <span class="text-red-500 font-semibold">Inactive</span>
+                            @endif
                         </td>
                     </tr>
-                    {{-- Data berikutnya --}}
+                    @endforeach
                 </tbody>
             </table>
         </div>
