@@ -20,13 +20,15 @@
                     @foreach ($products as $product)
                     <tr>
                         <td class="px-4 py-2 whitespace-nowrap">{{ $product['code'] ?? '-' }}<br><strong>{{ $product['name'] ?? '-' }}</strong></td>
-                        <td class="px-4 py-2 whitespace-nowrap">{{ $product['brand_name'] }}</td>
-                        <td class="px-4 py-2 whitespace-nowrap">{{ $product['category_name'] ?? '-' }}</td> <!-- Menampilkan nama kategori -->
+                        <td class="px-4 py-2 whitespace-nowrap">{{ $product['brand_name'] ?? '-' }}</td>
+                        <td class="px-4 py-2 whitespace-nowrap">{{ $product['category_name'] ?? '-' }}</td>
                         <td class="px-4 py-2 whitespace-nowrap">
                             @if ($product['status'] == 1)
-                                <span class="text-green-500 font-semibold">Active</span>
+                                <span class="text-green-600 font-semibold">Active</span>
                             @elseif ($product['status'] == 2)
-                                <span class="text-red-500 font-semibold">Inactive</span>
+                                <span class="text-red-600 font-semibold">Inactive</span>
+                            @else
+                                <span class="text-gray-600 font-semibold">Unknown</span>
                             @endif
                         </td>
                     </tr>

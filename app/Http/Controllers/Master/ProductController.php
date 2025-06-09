@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Master;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cache;
 
 class ProductController extends Controller
 {
@@ -22,13 +24,15 @@ class ProductController extends Controller
             $category = $categoriesArray->get($product['category_id']);
             $product['category_name'] = $category ? $category['name'] : 'Unknown'; // Jika tidak ada kategori, tampilkan 'Unknown'
         }
+        unset($product); // Good practice to unset reference variable
 
         $data = [
             'products' => $products,
             'categories' => $categories,
         ];
 
+        // dd($products);
+
         return view('master.produk.index', $data);
     }
-
 }
